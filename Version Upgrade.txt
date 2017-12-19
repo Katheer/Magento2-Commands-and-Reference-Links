@@ -1,0 +1,1 @@
+http://blog.chapagain.com.np/magento-2-upgrade-via-composer-command-line/
