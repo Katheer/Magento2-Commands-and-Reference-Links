@@ -1,0 +1,8 @@
+Re index
+$ php bin/magento indexer:reindex
+
+Cache Enabled
+php bin/magento cache:flush
+php bin/magento cache:enable
+php bin/magento cache:disable
+

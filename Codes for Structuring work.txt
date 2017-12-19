@@ -1,0 +1,112 @@
+::-----------------------------------
+  Call block template in to phtml
+::-----------------------------------
+
+{{block class="Magento\Bannerslider\Block\Slideshow" template="Magento_Bannerslider::bannerslider.phtml"}} - M2
+
+
+::-----------------------------------
+  Call custom template in to phtml 
+::-----------------------------------
+
+{{block type="core/template" template="theme/home_banner.phtml"  name="myname"}}
+{{block class="Magento\Framework\View\Element\Template" name="myname" template="Magento_Theme::theme/home_banner.phtml"}}
+{{block class="Magento\Framework\View\Element\Template" template="Magento_Cms::homepage/homepage-carousel.phtml"}}
+
+>>>>>>> ----------------
+##custom file path(Based on your theme you can change it)
+app/design/frontend/{Package}/{theme}/Magento_Theme/templates/html/test.phtml
+
+##calling in "xml" layout file
+<block class="Magento\Framework\View\Element\Template" name="test_file" template="Magento_Theme::html/test.phtml"/>
+
+##calling in blocks and cms pages
+{{block class="Magento\Framework\View\Element\Template" name="test_file" template="Magento_Theme::html/test.phtml"}}
+
+##calling in any phtml file
+<?php include ($block->getTemplateFile('Magento_Theme::html/test.phtml')) ?>
+
+OR
+as before
+<?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Theme::html/test.phtml")->toHtml();?>
+
+
+::-----------------------------------
+  Extension installation
+::-----------------------------------
+https://landofcoder.com/magento-2-mega-menu.html
+https://www.fastcomet.com/tutorials/magento2/installing-extensions
+
+
+
+::-----------------------------------
+  Magento 2 - Custom Page Layout (Create Root Template)
+::-----------------------------------
+https://magento.stackexchange.com/questions/95729/magento-2-custom-page-layout
+https://magento.stackexchange.com/questions/92079/magento-2-how-to-make-a-custom-home-page-layout?noredirect=1&lq=1
+https://magento.stackexchange.com/questions/117997/how-to-create-custom-layout-page-in-custom-theme
+http://inchoo.net/magento-2/magento-2-custom-cms-page-layout/
+
+
+::-----------------------------------
+  Install grunt in magento
+::-----------------------------------
+http://devdocs.magento.com/guides/v2.0/frontend-dev-guide/css-topics/css_debug.html
+https://firebearstudio.com/blog/magento-2-grunt.html
+https://www.youtube.com/watch?v=cLRJPqjQstY
+
+1) Rename following files 
+   Gruntfile.js
+   package.json
+2) Install node and add to your project
+3) Install grunt cli tool globally
+   npm install -g grunt-cli
+4) Install (or refresh) the node.js project dependency, including Grunt, for your Magento instance. To do this, run the following commands in a command prompt:
+   npm install
+   npm update
+5) Add your theme to Grunt configuration. To do this, in the "dev/tools/grunt/configs/themes.js" file, add your theme to module.exports like following:
+   module.exports = {
+    ...
+    <theme>: {
+        area: 'frontend',
+        name: '<Vendor>/<theme>',
+        locale: '<language>', 
+        files: [
+            '<path_to_file1>', //path to root source file
+            '<path_to_file2>'
+        ],
+        dsl: 'less'
+    ...
+    },
+
+	Use Following command to run our theme in powershell window
+	grunt -vvv exec:<theme>
+	
+	grunt clean:<theme>   - Removes the theme related static files in the pub/static and var directories.
+	grunt exec:<theme>    - Republishes symlinks to the source files to the pub/static/frontend/<Vendor>/<theme>/<locale> directory.
+	grunt less:<theme>    - Compiles .css files using the symlinks published in the pub/static/frontend/<Vendor>/<theme>/<locale> directory
+	grunt watch           - Tracks the changes in the source files, recompiles .css files, and reloads the page in the browser pages (you need to have LiveReload installed for you browser)
+	
+https://magento.stackexchange.com/questions/155539/magento-2-style-m-css-vs-style-l-css
+::-----------------------------------
+  Install gulp and sass in magento
+::-----------------------------------	
+	http://devdocs.magento.com/guides/v2.0/frontend-dev-guide/css-topics/gulp_sass.html
+	
+	
+::-----------------------------------	
+	Magento 2 CSS Preprocessing
+::-----------------------------------
+	http://www.developers-paradise.com/wp-content/uploads/2016/05/17-Hrvoje-Jurisic-CSS-Preprocessing-in-Magento-2.pdf
+	
+	
+::-----------------------------------
+  Usefull tutorials
+::-----------------------------------
+https://inviqa.com/blog/magento-2-tutorial-how-use-new-front-end-templating-system
+
+::-----------------------------------
+  Exteding and Overiding the layouts
+::-----------------------------------
+https://belvg.com/blog/override-a-layout-in-magento-2.html
+http://inchoo.net/magento-2/override-magento-2-layout-product-page-example/

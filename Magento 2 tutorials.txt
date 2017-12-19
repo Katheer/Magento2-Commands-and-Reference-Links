@@ -1,0 +1,9 @@
+--- Magento 2 theme creation ---
+https://www.magestore.com/magento-2-tutorial/3171-2/
+https://www.magestore.com/magento-2-tutorial/magento-2-theme-create-sample-custome-theme/
+
+http://devdocs.magento.com/guides/v2.1/frontend-dev-guide/themes/theme-inherit.html
+
+https://www.youtube.com/watch?v=cLRJPqjQstY
+
+http://devdocs.magento.com/guides/v2.1/frontend-dev-guide/themes/theme-create.html

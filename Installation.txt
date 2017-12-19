@@ -1,0 +1,7 @@
+Recommended server tools for Magento
+
+https://www.yireo.com/tutorials/magento/magento-administration/1705-recommended-server-tools-for-magento
+https://alankent.me/2016/06/03/magento-2-development-with-windows-and-vagrant/
+https://www.vagrantup.com/
+https://alankent.me/2016/10/15/magento-2-tool-chain/
+http://mageclass.com/lets-start-with-magento-2/

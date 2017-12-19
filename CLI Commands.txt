@@ -1,0 +1,153 @@
+
+http://devdocs.magento.com/guides/v2.0/config-guide/cli/config-cli-subcommands.html
+
+php bin/magento indexer:reindex 
+php bin/magento setup:upgrade   ==> this command helps us to delete all the files in pub/static
+php bin/magento setup:static-content:deploy   ==> this command helps us to reload static content again it is included new frontend theme.
+php bin/magento cache:flush
+php bin/magento cache:disable
+php bin/magento deploy:mode:show
+php bin/magento deploy:mode:set developer
+magento deploy:mode:set production
+php bin/magento setup:di:compile  - This will wipe out all the necessary cache/generation/etc files without deleting anything you actually need.
+php bin/magento dev:source-theme:deploy --theme [Vendor]/[theme] --locale <locale>
+
+
+php bin/magento dev:source-theme:deploy --type=less --locale=en_US --area=frontend --theme=Eight25media/molly
+https://magento.stackexchange.com/questions/98800/db-error-when-running-grunt-exec-magento2
+
+php bin/magento theme:uninstall frontend/Magento/luma
+
+##Deploy specific themes:
+php bin/magento setup:static-content:deploy --theme Magento/backend --theme Vendor/mytheme
+
+php bin/magento setup:static-content:deploy --theme Eight25media/molly --no-html-minify
+
+php -dmemory_limit=5G bin/magento  setup:static-content:deploy --theme Eight25media/molly --no-html-minify
+
+##Exclude themes:
+php bin/magento setup:static-content:deploy --exclude-theme Magento/luma
+
+##If you need deploys static content for particular language (en_US), and exclude other theme, 
+and need not minify HTML files then use this command:
+
+php bin/magento setup:static-content:deploy en_US --exclude-theme Vendor/yourtheme --no-html-minify
+
+##I found a way to deploy all changes a little faster:
+Install Grunt + config your theme (one for each language)
+after each change run:
+grunt exec:{theme_name} // Clean folders and deploy less files
+grunt less:{theme_name} // Process less files
+Voila now you'll have all your changes deployed in Just(¿?) 12~16 sec, 12 sec is my personal record!
+
+##If you are making changes to a (already deployed) .less files just run grunt less:{theme_name}.
+So, you have to run grunt exec:{theme_name} only when:
+Add/Remove/Rename a *.less File
+Add/Remove/Rename a *.js Fils
+Add/Remove/Rename a *.css File
+Add/Remove/Rename a image File
+Add/Remove requirejs-config.js
+Additionally I disabled blocks, layouts and full page Caches, so any change to templates and/or xml 
+layouts will be displayed automatically.
+
+
+https://magento.stackexchange.com/questions/101131/magento2-how-can-i-deploy-my-theme-only
+http://inchoo.net/magento-2/magento-2-slick-carousel/
+http://inchoo.net/magento-2/more-less-functionality-in-magento2/
+http://inchoo.net/magento-2/working-with-css-in-your-first-magento-2-project/
+
+
+
+http://devdocs.magento.com/guides/v2.0/frontend-dev-guide/css-guide/css_quick_guide_mode.html
+https://webkul.com/blog/use-less-magento-2/
+https://drive.google.com/file/d/0B_3mauXj4AQINXVoTXlBT2JSUjA/view
+
+
+http://devdocs.magento.com/guides/v2.0/coding-standards/code-standard-less.html#variables
+http://devdocs.magento.com/guides/v2.0/frontend-dev-guide/css-guide/css_quick_guide_approach.html
+http://devdocs.magento.com/guides/v2.0/frontend-dev-guide/css-guide/css_quick_guide_mode.html
+http://devdocs.magento.com/guides/v2.0/frontend-dev-guide/responsive-web-design/rwd_css.html
+
+::-----------------------------
+How to add different custom css file on specific CMS pages
+::----------------------------
+
+https://magento.stackexchange.com/questions/92184/magento-2-how-to-add-custom-css-files-into-the-head-using-helper
+https://magento.stackexchange.com/questions/108685/how-to-add-a-custom-css-file-in-magento-2
+https://magento.stackexchange.com/questions/107482/adding-css-to-a-cms-page-using-layout-update-xml
+
+
+
+http://devdocs.magento.com/guides/v2.0/frontend-dev-guide/theme-best-practice.html
+
+/*---------------------
+   Start Front end Development Step by Step
+ ----------------------*/
+https://www.integer-net.com/magento-2-frontend-workflow-step-by-step/
+
+https://github.com/subodha/magento-2-gulp
+http://www.ibnab.com/en/blog/magento-2/magento-2-video-introduction-for-using-gulp-in-frontend
+http://livereload.com/
+
+
+/*---------------------
+   When you change to developer or production mode, we clear the contents of following directories:
+ ----------------------*/
+var/cache
+var/di
+var/generation
+var/view_preprocessed
+pub/static
+
+
+https://phpbugs.wordpress.com/2015/07/21/magento-2-cannot-create-symlink-error-code1314/
+
+::--------------------------
+  MAGENTO 2: CANNOT CREATE SYMLINK, ERROR CODE(1314)
+::--------------------------
+Go to file app/etc/di.xml
+Find out the below code part
+
+Magento\Framework\App\View\Asset\MaterializationStrategy\Symlink
+Magento\Framework\App\View\Asset\MaterializationStrategy\Copy
+
+Replace this with below:
+
+Magento\Framework\App\View\Asset\MaterializationStrategy\Copy
+Magento\Framework\App\View\Asset\MaterializationStrategy\Copy
+
+
+::-----------------------------
+  Install extension
+::-----------------------------
+To verify that the extension installed properly, run the following command:
+php bin/magento module:status
+
+Amasty_Base
+Amasty_Blog
+Amasty_Deliverydate
+
+
+Enable the extension
+php bin/magento module:enable J2t_Payplug --clear-static-content
+
+Register the extension:
+php bin/magento setup:upgrade
+
+Recompile your Magento project:
+php bin/magento setup:di:compile
+
+A Quick solutions for memory limit in magento 2 command is directly adding memory limit inside commannd,
+
+For Compilation command,
+php -dmemory_limit=5G bin/magento setup:di:compile
+
+For Deployment
+php -dmemory_limit=5G bin/magento setup:static-content:deploy
+
+You can change as per 5G to max if issue not resolve.
+
+::----------------------------------------------------
+  Common layout customization tasks
+::----------------------------------------------------
+http://devdocs.magento.com/guides/v2.0/frontend-dev-guide/layouts/xml-manage.html
